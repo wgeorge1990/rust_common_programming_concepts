@@ -28,6 +28,8 @@ fn array_access() {
     println!("Please enter an array index.");
     let mut index = String::new();
     io::stdin().read_line(&mut index).expect("Failed to read line!");
+    //rust protects program if index is two high by panicking
+    //based on the predetermined length of the array
     let index: usize = index.trim().parse().expect("Not a number");
     let element = a[index];
     println!(
@@ -35,3 +37,5 @@ fn array_access() {
         index, element
     );
 }
+
+
