@@ -19,7 +19,6 @@ fn main() {
  println!("{}", fivehundred);
  println!("{}", six_point_four);
  println!("{}", one);
-
  array_access()
 }
 
