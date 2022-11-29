@@ -15,4 +15,8 @@
 4. loops
     - loop
     - while 
-    - for
+    - for 
+    - for with range
+    - TODO: exercises pg.58
+5. ownership
+    - ...
