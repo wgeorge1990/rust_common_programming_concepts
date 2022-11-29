@@ -22,13 +22,20 @@ fn main() {
 
 println!("LIFTOFF!!!");
 
+
+let a = [10, 20, 30, 40, 50];
 // Using while loop to interate an array
-    let a = [10, 20, 30, 40, 50];
     let mut index = 0;
 
     while index < a.len() {
     // while index < 5 {
         println!("The value in: {}", a[index]);
         index += 1;
+    }
+
+// less error prone method of iterating
+//    full length of an array with for loop
+    for element in a.iter() {
+        println!("the value is: {}", element);
     }
 }
