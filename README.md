@@ -7,3 +7,5 @@
     - arrays
 2. functions
     - functions
+3. branches
+    - control flow
