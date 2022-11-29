@@ -27,7 +27,9 @@ fn main() {
     println!("{}, world!", s2);
     // in rust because pointer,length,capacity and initial variable invalidation occurs,
     // this is called a move oppose to a shallow copy.
-    
+    // RUST WILL NEVER CREATE DEEP COPIES OF YOUR DATA
+    // which means automatic copying is considered inexpensive in terms
+    // of runtime performance.
 
 }
 
