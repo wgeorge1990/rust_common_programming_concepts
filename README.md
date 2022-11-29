@@ -9,3 +9,10 @@
     - functions
 3. branches
     - control flow
+    - functions as statements
+    - variable assignment from fn statemnts
+    - consistent types in if blocks
+4. loops
+    - loop
+    - while 
+    - for
