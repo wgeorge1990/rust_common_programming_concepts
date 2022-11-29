@@ -26,7 +26,8 @@ println!("LIFTOFF!!!");
     let a = [10, 20, 30, 40, 50];
     let mut index = 0;
 
-    while index < 5 {
+    while index < a.len() {
+    // while index < 5 {
         println!("The value in: {}", a[index]);
         index += 1;
     }
