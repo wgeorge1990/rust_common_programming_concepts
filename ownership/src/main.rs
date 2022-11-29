@@ -25,6 +25,9 @@ fn main() {
     //invalidated reference which causes a double free error which 
     //occurs when the same memory is tried to be cleared twice.
     println!("{}, world!", s2);
+    // in rust because pointer,length,capacity and initial variable invalidation occurs,
+    // this is called a move oppose to a shallow copy.
+    
 
 }
 
