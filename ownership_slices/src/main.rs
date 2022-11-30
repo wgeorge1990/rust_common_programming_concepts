@@ -1,13 +1,17 @@
 fn main() {
     println!("Hello, world!");
     let s: String = String::from("hello world");
-
+    let s2: String = String::from("thisisonewholeword");
     // let length: usize = first_word(&s);
-    let length: &str = first_word(&s);
+    let word = first_word(&s);
+        // or
+    let word2 = first_word(&s2);
 
     println!("string length: {}", s.len());
-    println!("The length of the first word is: {}", length);
-    println!("{}", length);
+    println!("The length of the first word is: {}", word);
+    println!("{}", word);
+    println!("{}", word2);
+
 }
 
 
@@ -18,7 +22,7 @@ fn main() {
 // so the entire string should be returned.
 
 // fn first_word(s: &String) -> usize {
-fn first_word(s: &String) -> &str {
+fn first_word(s: &str) -> &str {
     let bytes = s.as_bytes();
 
     for (i, &item) in bytes.iter().enumerate() {
