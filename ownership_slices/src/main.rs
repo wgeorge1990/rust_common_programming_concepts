@@ -16,6 +16,7 @@ fn first_word(s: &String) -> usize {
     let bytes = s.as_bytes();
 
     for (i, &item) in bytes.iter().enumerate() {
+        // searching for space in string using byte literal syntax: b' '
         if item == b' ' {
             return i;
         }
