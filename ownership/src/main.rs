@@ -7,6 +7,7 @@ fn main() {
     //copied and save to the stack in two differnt places
     let x = 5;
     let y = x;
+    println!("{}", y);
 
     //consists of three parts stored on the stack:
     // a pointer to the memory that hold the contents of the string
@@ -31,6 +32,20 @@ fn main() {
     // which means automatic copying is considered inexpensive in terms
     // of runtime performance.
 
+    // returning multiple value from a function using a tuple
+    let string_one = String::from("hello");
+    // string_one is moved and returned by calculate_length
+    // and then moved to string_two via assignment and legth is calculated and passed out via second
+    // argument of the tuple.
+    let (string_two, len) = calculate_length(string_one);
+
+    println!("The length of '{}' is {}", string_two, len);
+
+}
+
+fn calculate_length(s: String) -> (String, usize) {
+    let length = s.len();
+    (s, length)
 }
 
 
