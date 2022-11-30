@@ -58,8 +58,10 @@ fn main() {
         s.len()
     } // Here, s goes out of scope. But because it does not have ownership of
     //   what it refers to, nothing happens.
+    // ownership is never passed and therefor never has to be given back.
+    // This process of referencing parameters is called 'borrowing'
 
-    
+
 
 
 
@@ -84,6 +86,3 @@ fn calculate_length(s: String) -> (String, usize) {
 // ALL STACK DATA MUST HAVE A KNOW FIXED SIZE
 // otherwise at compile time it must be stored on
 //    the heap.
-
-
-
