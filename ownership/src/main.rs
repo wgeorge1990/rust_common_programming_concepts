@@ -41,7 +41,27 @@ fn main() {
 
     println!("The length of '{}' is {}", string_two, len);
 
+    // References and borrowing
+    // define and use function that has reference to an
+    //    object as a parameter instead of taking ownership
+    //    of the value.
+    // & fn(s: &String) -> usize {} and fn(&str) 
+    // &known as refernce: allows refering to some value
+    // without having to take ownership of it.
+
+    let rs1 = String::from("hello");
+    let len2 = calculate_length_with_reference(&rs1);
+    println!("The length of '{}' is {}.", rs1, len2);
 }
+
+    fn calculate_length_with_reference(s: &String) -> usize { // s is a reference to a String
+        s.len()
+    } // Here, s goes out of scope. But because it does not have ownership of
+    //   what it refers to, nothing happens.
+
+    
+
+
 
 fn calculate_length(s: String) -> (String, usize) {
     let length = s.len();
