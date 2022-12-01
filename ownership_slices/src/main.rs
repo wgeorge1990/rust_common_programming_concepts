@@ -11,9 +11,9 @@ fn main() {
     println!("The length of the first word is: {}", word);
     println!("{}", word);
     println!("{}", word2);
-
+    
+    other_slices();
 }
-
 
 // Here’s a small programming problem: write a function 
 // that takes a string and returns the first word it 
@@ -35,4 +35,9 @@ fn first_word(s: &str) -> &str {
         }
     }
     &s[..]
+}
+
+fn other_slices() {
+    let a = [1, 2, 3, 4, 5 ];
+    let _slice = &a[1..3];
 }
