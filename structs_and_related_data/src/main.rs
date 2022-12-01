@@ -14,10 +14,12 @@ fn main() {
         sign_in_count: 1,
     };
 
+    // refactor to use feild init shorthand becasue the fields
+    // of the user struct and the parameter names are exactly! the same.
     fn build_user(email: String, username: String) -> User {
         User {
-            email: email,
-            username: username,
+            email,
+            username,
             active: true,
             sign_in_count: 1,
         }
