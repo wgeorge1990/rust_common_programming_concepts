@@ -1,32 +1,11 @@
 // the idiomatic way to bring the standard libs HashMap
 //   struct into the scope of a binary crate; 
 use std::collections::HashMap;
-mod front_of_house {
-    pub mod hosting {
-        pub fn add_to_waitlist() {
-            println!("add to waitlist");
-        }
-
-        fn seat_at_table() {
-            println!("seat at table");
-        }
-    }
-
-    mod serving {
-        fn take_order() {
-            println!("take order");
-        }
-        
-        fn serve_order() {
-            println!("save order");
-        }
-
-        fn take_payment() {
-            println!("take payment");
-        }
-    }
-}
-
+// pub allows external code to refer to hosting module as well
+// this is called re-exporting.
+// moving front of house to front_of_house.rs and add bellow line.
+mod front_of_house;
+pub use crate::front_of_house::hosting;
 mod back_of_house {
     //public scoping works the same in modules as it
     //does in structs. ENUMs on the other hand work as a whole.
@@ -51,9 +30,6 @@ mod back_of_house {
     }
 
 }
-// pub allows external code to refer to hosting module as well
-pub use crate::front_of_house::hosting;
-// use crate::front_of_house::hosting;
 
 // public functions in crate or root scope
 pub fn eat_at_restaurant() {
@@ -69,10 +45,10 @@ pub fn eat_at_restaurant() {
     // above line will not work if uncommented
 
     // Absolute path
-    crate::front_of_house::hosting::add_to_waitlist();
+    hosting::add_to_waitlist();
     
     // Relative path
-    front_of_house::hosting::add_to_waitlist();
+    hosting::add_to_waitlist();
     // with use crate::front_of_house::hosting;
     hosting::add_to_waitlist();
     hosting::add_to_waitlist();
@@ -91,4 +67,5 @@ mod tests {
         let result = add(2, 2);
         assert_eq!(result, 4);
     }
+
 }
