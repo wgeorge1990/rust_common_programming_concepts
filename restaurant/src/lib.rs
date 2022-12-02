@@ -1,3 +1,6 @@
+// the idiomatic way to bring the standard libs HashMap
+//   struct into the scope of a binary crate; 
+use std::collections::HashMap;
 mod front_of_house {
     pub mod hosting {
         pub fn add_to_waitlist() {
@@ -27,11 +30,12 @@ mod front_of_house {
 mod back_of_house {
     //public scoping works the same in modules as it
     //does in structs. ENUMs on the other hand work as a whole.
+    // structs are private by default, unless told otherwise.
     pub struct Breakfast {
         pub toast: String,
         seasonal_fruit: String,
     }
-
+    //enums variants are public by default.
     pub enum Appetizer {
         Soup,
         Salad,
@@ -47,6 +51,8 @@ mod back_of_house {
     }
 
 }
+
+use crate::front_of_house::hosting;
 
 // public functions in crate or root scope
 pub fn eat_at_restaurant() {
@@ -66,6 +72,9 @@ pub fn eat_at_restaurant() {
     
     // Relative path
     front_of_house::hosting::add_to_waitlist();
+    // with use crate::front_of_house::hosting;
+    hosting::add_to_waitlist();
+    hosting::add_to_waitlist();
 }
 
 pub fn add(left: usize, right: usize) -> usize {
