@@ -4,7 +4,8 @@ use std::collections::HashMap;
 // pub allows external code to refer to hosting module as well
 // this is called re-exporting.
 // moving front of house to front_of_house.rs and add bellow line.
-mod front_of_house;
+mod front_of_house; // leave out the block {} tells the program to load
+// module from different file.
 pub use crate::front_of_house::hosting;
 mod back_of_house {
     //public scoping works the same in modules as it
