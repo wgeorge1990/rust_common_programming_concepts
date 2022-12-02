@@ -51,8 +51,9 @@ mod back_of_house {
     }
 
 }
-
-use crate::front_of_house::hosting;
+// pub allows external code to refer to hosting module as well
+pub use crate::front_of_house::hosting;
+// use crate::front_of_house::hosting;
 
 // public functions in crate or root scope
 pub fn eat_at_restaurant() {
