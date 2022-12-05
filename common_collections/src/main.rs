@@ -73,4 +73,15 @@ fn string_collections() {
     let tic_tac_toe = format!("{}-{}-{}", tic, tac, toe);
     println!("{:?}",tic_tac_toe);
 
+    let hello = "Здравствуйте";
+    println!("{}", hello);
+    let h = &hello[0..4];
+    // line 80 causes program to panic and quit because
+    // the the complete char is stored in 2 byte peices 
+    // oppose to one like some characters. This is why
+    // working with strings in trickier than some think.
+    let e = &hello[0..1];
+    println!("{}", h);
+    println!("{}", e);
+
 }
