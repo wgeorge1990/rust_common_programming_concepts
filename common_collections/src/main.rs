@@ -52,6 +52,8 @@ fn main() {
     println!("{:?}", row);
 
     string_collections();
+    iterating_over_strings();
+    storing_keys_and_values_in_hasmaps();
 
 }
 
@@ -75,13 +77,40 @@ fn string_collections() {
 
     let hello = "Здравствуйте";
     println!("{}", hello);
-    let h = &hello[0..4];
+    let h = &hello[0..2];
     // line 80 causes program to panic and quit because
     // the the complete char is stored in 2 byte peices 
     // oppose to one like some characters. This is why
     // working with strings in trickier than some think.
-    let e = &hello[0..1];
+    // let e = &hello[0..1];
     println!("{}", h);
-    println!("{}", e);
+    // println!("{}", e);
 
+}
+
+fn iterating_over_strings() {
+    for c in "hello world".chars() {
+        println!("{}", c);
+    }
+
+    for c in "Здравствуйте".chars() {
+        println!("{}", c);
+    }
+
+    // remember that valid Unicode scalar values may be 
+    // made up of more than 1 byte.
+
+    for b in "Здравствуйте".bytes() {
+        println!("{}", b);
+    }
+
+    for b in "hello world".bytes() {
+        println!("{}", b);
+    }
+
+}
+
+fn storing_keys_and_values_in_hasmaps() {
+    println!("storing_keys_and_values_in_hasmaps()");
+    
 }
