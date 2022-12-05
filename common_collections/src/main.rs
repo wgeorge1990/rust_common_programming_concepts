@@ -1,4 +1,11 @@
 fn main() {
+    //vectors_and_such();
+    // string_collections();
+    // iterating_over_strings();
+    storing_keys_and_values_in_hasmaps();
+}
+
+fn vectors_and_such() {
     println!("Vector");
     // let v: Vec<i32> = Vec::new();
     // v.push(1);
@@ -50,11 +57,6 @@ fn main() {
         SpreadsheetCell::Float(10.12),
     ];
     println!("{:?}", row);
-
-    string_collections();
-    iterating_over_strings();
-    storing_keys_and_values_in_hasmaps();
-
 }
 
 fn string_collections() {
@@ -112,5 +114,5 @@ fn iterating_over_strings() {
 
 fn storing_keys_and_values_in_hasmaps() {
     println!("storing_keys_and_values_in_hasmaps()");
-    
+
 }
