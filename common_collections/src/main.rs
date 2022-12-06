@@ -122,4 +122,5 @@ fn storing_keys_and_values_in_hasmaps() {
     for (key, value) in scores.iter_mut() {
         println!("{} '{}' ", key, value);
     }
+    
 }
