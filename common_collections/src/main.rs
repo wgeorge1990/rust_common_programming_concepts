@@ -2,7 +2,8 @@ fn main() {
     //vectors_and_such();
     // string_collections();
     // iterating_over_strings();
-    storing_keys_and_values_in_hasmaps();
+    // storing_keys_and_values_in_hasmaps();
+    overwriting_a_value_in_a_hashmap();
 }
 
 fn vectors_and_such() {
@@ -124,9 +125,9 @@ fn storing_keys_and_values_in_hasmaps() {
 
     println!("{:?}",scores);
 
-    // for (key, value) in scores.iter() {
-    //     println!("{}:{}", key, value);
-    // }
+    for (key, value) in &scores {
+        println!("{}:{}", key, value);
+    }
 
     let team_name = String::from("Blue");
     let score = scores.get(&team_name);
@@ -155,7 +156,15 @@ fn storing_keys_and_values_in_hasmaps() {
     // but when printed, notice that the keys are ordered a..z by default.
     println!("{:?}", team_scores);
 
+}
 
+fn overwriting_a_value_in_a_hashmap() {
+    use std::collections::HashMap;
 
+    let mut scores = HashMap::new();
 
+    scores.insert(String::from("Blue"), 111);
+    scores.insert(String::from("Blue"),222);
+
+    println!("{:?}", scores);
 }
