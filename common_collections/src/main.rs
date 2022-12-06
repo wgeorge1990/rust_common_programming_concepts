@@ -3,7 +3,8 @@ fn main() {
     // string_collections();
     // iterating_over_strings();
     // storing_keys_and_values_in_hasmaps();
-    overwriting_a_value_in_a_hashmap();
+    // overwriting_a_value_in_a_hashmap();
+    inserting_value_for_key_with_no_value();
 }
 
 fn vectors_and_such() {
@@ -168,3 +169,23 @@ fn overwriting_a_value_in_a_hashmap() {
 
     println!("{:?}", scores);
 }
+
+fn inserting_value_for_key_with_no_value() {
+    use std::collections::HashMap;
+
+    let mut scores = HashMap::new();
+    scores.insert(String::from("Blue"), 10);
+
+    // using entry to check for key value.
+    scores.entry(String::from("Yellow")).or_insert(50);
+    scores.entry(String::from("Blue")).or_insert(50);
+
+    println!("{:?}", scores);
+    // =>   {"Blue": 10, "Yellow": 50}
+    // " The or_insert method on Entry is defined to return a mutable reference to the value 
+    //    for the corresponding Entry key if that key exists, and if not, inserts the 
+    //    parameter as the new value for this key and returns a mutable reference to the new value."
+    //  TODO: (add source info and formatting) 
+    //         The Rust Programming Language (Covers Rust 2018) - Kindle Edition.
+}
+
