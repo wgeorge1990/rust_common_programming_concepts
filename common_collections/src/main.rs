@@ -4,7 +4,8 @@ fn main() {
     // iterating_over_strings();
     // storing_keys_and_values_in_hasmaps();
     // overwriting_a_value_in_a_hashmap();
-    inserting_value_for_key_with_no_value();
+    // inserting_value_for_key_with_no_value();
+    updating_value_based_on_old_value();
 }
 
 fn vectors_and_such() {
@@ -187,5 +188,26 @@ fn inserting_value_for_key_with_no_value() {
     //    parameter as the new value for this key and returns a mutable reference to the new value."
     //  TODO: (add source info and formatting) 
     //         The Rust Programming Language (Covers Rust 2018) - Kindle Edition.
+}
+
+fn updating_value_based_on_old_value() {
+    use std::collections::HashMap;
+    
+    let text = "hello world wonderful world";
+    let mut map = HashMap::new();
+
+    for word in text.split_whitespace() {
+        let count = map.entry(word).or_insert(0);
+        //count stores the mutable reference to the value,
+        //so in order to modify it we need to dereference it first
+        // with the * which holds strong to the borrowing rules
+        // in place by the language rules.
+        *count += 1;
+    }
+    println!("{:?}", map);
+    // => {"wonderful": 1, "world": 2, "hello": 1}
+    // 1}. The or_insert method actually returns a mutable reference (&mut V) to the value for this key. 
+    // Klabnik, Steve; Nichols, Carol. The Rust Programming Language (Covers Rust 2018) (p. 148). No Starch Press. Kindle Edition. 
+
 }
 
