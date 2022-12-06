@@ -115,12 +115,47 @@ fn iterating_over_strings() {
 fn storing_keys_and_values_in_hasmaps() {
     println!("storing_keys_and_values_in_hasmaps()");
     use std::collections::HashMap;
+
     let mut scores = HashMap::new();
+
     scores.insert(String::from("Blue"), 10);
+
     scores.insert(String::from("Yellow"), 50);
+
     println!("{:?}",scores);
-    for (key, value) in scores.iter_mut() {
-        println!("{} '{}' ", key, value);
-    }
-    
+
+    // for (key, value) in scores.iter() {
+    //     println!("{}:{}", key, value);
+    // }
+
+    let team_name = String::from("Blue");
+    let score = scores.get(&team_name);
+    match score {
+        Some(score) => println!("{} {}", team_name, score),
+        None => println!("key not found"),
+    };
+
+    let team_vec = vec![
+        String::from("One"), 
+        String::from("Two"), 
+        String::from("Three"), 
+        String::from("Four"), 
+        String::from("Five") ];
+
+    let score_vec = vec![
+        10,
+        20,
+        30,
+        40,
+        50 ];
+
+    let team_scores: HashMap<_, _> = team_vec.iter().zip(score_vec.iter()).collect();
+
+    // notice how the final hash map consists of the paralell team name and score value
+    // but when printed, notice that the keys are ordered a..z by default.
+    println!("{:?}", team_scores);
+
+
+
+
 }
