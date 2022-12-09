@@ -1,3 +1,36 @@
+//A summary trait that consists of the behavior provided
+//  by the summarize method.
+pub trait Summary {
+    fn summarize(&self) -> String;
+} 
+
+pub struct NewsArticle {
+    pub headline: String,
+    pub location: String,
+    pub author: String,
+    pub content: String,
+}
+
+impl Summary for NewsArticle {
+    fn summarize(&self) -> String {
+        format!("{}, by {} ({})", self.headline, self.author, self.location)
+    }
+}
+
+pub struct Tweet {
+    pub username: String,
+    pub content: String,
+    pub reply: bool,
+    pub retweet: bool,
+}
+
+impl Summary for Tweet {
+    fn summarize(&self) -> String {
+        format!("{}: {}", self.username, self.content)
+    }
+}
+
+
 // fn largest<T>(list: &[T]) -> T {
 //     let mut largest = list[0];
 
@@ -28,6 +61,16 @@ fn largest_char(list: &[char]) -> char {
 //source => Klabnik, Steve; Nichols, Carol. The Rust Programming Language (Covers Rust 2018) (p. 174). No Starch Press. Kindle Edition.
 
 fn main() {
+    let tweet = Tweet {
+        username: String::from("horse_ebooks"),
+        content: String::from("of course, as you probably already know, people are"),
+        reply: false,
+        retweet: false,
+    };
+
+    // test sumarize trait method implemented on the tweet instance
+    println!("1 new tweet: {}", tweet.summarize());
+
     #[derive(Debug)]
     struct Point<T, U> {
         x: T,
