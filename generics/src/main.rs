@@ -29,15 +29,51 @@ fn largest_char(list: &[char]) -> char {
 
 fn main() {
     #[derive(Debug)]
-    struct Point<T> {
+    struct Point<T, U> {
         x: T,
-        y: T,
+        y: U,
     }
+
+    impl<T, U> Point<T, U> {
+        fn mixup<V, W> (self, other: Point<V, W>) -> Point<T, W> {
+            Point {
+                x: self.x,
+                y: other.y,
+            }
+        }
+    }
+    #[derive(Debug)]
+    struct Name<F, L> {
+        first: F,
+        last: L,
+    }
+
+    impl<F, L> Name<F, L> {
+        fn swap_last_names<A, B> (self, other: Name<A, B>) -> Name<F,B> {
+            Name {
+                first: self.first,
+                last: other.last,
+            }
+        }
+    }
+
+    let n1 = Name {first: "will", last: "george"};
+    let n2 = Name {first: "mackie", last: "marcello"};
+    let n3 = n1.swap_last_names(n2);
+    println!("{:?}", n3);
+    
+
+    let p1 = Point {x: 5, y: 10.4};
+    let p2 = Point {x: "hello", y: 'c'};
+    let p3 = p1.mixup(p2);
+    println!("p3.x = {}, p3.y = {}", p3.x, p3.y);
+
 
     let will_work = Point { x: 5, y: 4 };
     // wont work yet because T type is the same for x and
     // y in the above struct. need to fix...
-    // let wont_work = Point { x: 5, y: 4.0 };
+    let wont_work = Point { x: 5, y: 4.0 };
+    println!("{:?}", will_work);
     println!("{:?}", wont_work);
     println!("Generics");
     //Removing duplication by extracting a function
