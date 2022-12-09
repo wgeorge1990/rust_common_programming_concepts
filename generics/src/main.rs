@@ -1,7 +1,16 @@
 //A summary trait that consists of the behavior provided
 //  by the summarize method.
+// to use a trait from a library one would add:
+// use aggregator::Summary to gain access to the given trait
+// also the summary trait would also need to be public for another
+// crate to implement it.
+// one restriction to note with trait implementation is that we
+// can only implement a trait on a type only if either the trait
+// or type is local to our crate.
 pub trait Summary {
-    fn summarize(&self) -> String;
+    fn summarize(&self) -> String {
+        String::from("(Read more...)")
+    }
 } 
 
 pub struct NewsArticle {
@@ -11,11 +20,13 @@ pub struct NewsArticle {
     pub content: String,
 }
 
-impl Summary for NewsArticle {
-    fn summarize(&self) -> String {
-        format!("{}, by {} ({})", self.headline, self.author, self.location)
-    }
-}
+impl Summary for NewsArticle {}
+//     fn summarize(&self) -> String {
+//         format!("{}, by {} ({})", 
+//         self.headline, 
+//         self.author, self.location)
+//     }
+// }
 
 pub struct Tweet {
     pub username: String,
@@ -70,6 +81,18 @@ fn main() {
 
     // test sumarize trait method implemented on the tweet instance
     println!("1 new tweet: {}", tweet.summarize());
+
+    let news_article = NewsArticle {
+        headline: String::from("NewsArticle headline"),
+        location: String::from("Atlanta"),
+        author: String::from("William George"),
+        content: String::from("This is content but the default trait 
+        implementation for summary should run becaue the summarize block implementation is empty for NewsArticle type.")
+    };
+
+    //default trait summary should be printed from below function because
+    //the trait implemtation for summarize is an empty block.
+    println!("1 new newsarticle: default behavior expected: {}", news_article.summarize());
 
     #[derive(Debug)]
     struct Point<T, U> {
