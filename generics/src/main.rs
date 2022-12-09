@@ -16,6 +16,12 @@ pub trait Summary {
     }
 } 
 
+//clearer trait bounds with where clauses
+//fn some_fn<T: Display + Clone, U:Clone + Debug>(t: T, u: U)-> i32 {body}
+//vs
+//fn some_fn<T,U>(t: T, u: U) -> i32
+//where T: Display + Clone,
+//U: Clone + Debug {body}
 pub struct NewsArticle {
     pub headline: String,
     pub location: String,
@@ -51,8 +57,10 @@ impl Summary for Tweet {
             format!("@{}", self.username)
     }
 }
-
-pub fn notify(item: impl Summary) {
+//  a trait bound look like this -> 
+// pub fn notify<T: Summary>(item: T) {
+// pub fn notify(item: impl Summary) {
+pub fn notify<T: Summary>(item: T) {
     println!("Breaking new! {}", item.summarize());
 }
 
