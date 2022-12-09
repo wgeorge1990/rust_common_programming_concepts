@@ -1,13 +1,13 @@
-fn largest<T>(list: &[T]) -> T {
-    let mut largest = list[0];
+// fn largest<T>(list: &[T]) -> T {
+//     let mut largest = list[0];
 
-    for &item in list.iter() {
-        if item > largest {
-            largest = item;
-        }
-    }
-    largest
-}
+//     for &item in list.iter() {
+//         if item > largest {
+//             largest = item;
+//         }
+//     }
+//     largest
+// }
 
 fn largest_char(list: &[char]) -> char {
     let mut largest = list[0];
@@ -28,11 +28,22 @@ fn largest_char(list: &[char]) -> char {
 //source => Klabnik, Steve; Nichols, Carol. The Rust Programming Language (Covers Rust 2018) (p. 174). No Starch Press. Kindle Edition. 
 
 fn main() {
+    #[derive(Debug)]
+    struct Point<T> {
+        x: T,
+        y: T,
+    }
+
+    let will_work = Point { x: 5, y: 4 };
+    // wont work yet because T type is the same for x and
+    // y in the above struct. need to fix...
+    // let wont_work = Point { x: 5, y: 4.0 };
+    println!("{:?}", wont_work);
     println!("Generics");
     //Removing duplication by extracting a function
-    let number_list = vec![34, 50, 25, 100, 65];
-    let result = largest(&number_list);
-    println!("The largest number is {}", result);
+    // let number_list = vec![34, 50, 25, 100, 65];
+    // let result = largest(&number_list);
+    // println!("The largest number is {}", result);
     
     // code block replaced by initial recactor
     // let mut largest = number_list[0];
@@ -43,9 +54,9 @@ fn main() {
     // }
 
     //find the largest number in the next vector
-    let number_list = vec![102, 34, 6000, 89, 54, 2, 43, 8];
-    let result = largest(&number_list);
-    println!("The largest number in the next vector is {}", result);
+    // let number_list = vec![102, 34, 6000, 89, 54, 2, 43, 8];
+    // let result = largest(&number_list);
+    // println!("The largest number in the next vector is {}", result);
 
     let char_list = vec!['a', 'b', 'c', 'd', 'e', 'f', 'g'];
     let result = largest_char(&char_list);
