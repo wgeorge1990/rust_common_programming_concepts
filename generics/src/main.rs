@@ -52,6 +52,10 @@ impl Summary for Tweet {
     }
 }
 
+pub fn notify(item: impl Summary) {
+    println!("Breaking new! {}", item.summarize());
+}
+
 
 // fn largest<T>(list: &[T]) -> T {
 //     let mut largest = list[0];
@@ -104,7 +108,9 @@ fn main() {
     //default trait summary should be printed from below function because
     //the trait implemtation for summarize is an empty block.
     println!("1 new newsarticle: default behavior expected: {}", news_article.summarize());
-
+    // can call notify on items that implement the summary trait on them like newsarticle and tweet.
+    notify(news_article);
+    notify(tweet);
     #[derive(Debug)]
     struct Point<T, U> {
         x: T,
