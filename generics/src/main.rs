@@ -22,6 +22,18 @@ pub trait Summary {
 //fn some_fn<T,U>(t: T, u: U) -> i32
 //where T: Display + Clone,
 //U: Clone + Debug {body}
+
+//Returning Types that Implement Traits
+//fn returns_summarizable() -> Summary {
+//  Tweet {
+//      username: String::from("horse_ebooks"),
+//      content: String::from("of course, as you prob")
+//      reply: false,
+//      retwee: false,
+//}
+//}
+
+
 pub struct NewsArticle {
     pub headline: String,
     pub location: String,
@@ -65,18 +77,7 @@ pub fn notify<T: Summary>(item: T) {
 }
 
 
-// fn largest<T>(list: &[T]) -> T {
-//     let mut largest = list[0];
-
-//     for &item in list.iter() {
-//         if item > largest {
-//             largest = item;
-//         }
-//     }
-//     largest
-// }
-
-fn largest_char(list: &[char]) -> char {
+fn largest<T: PartialOrd + Copy>(list: &[T]) -> T {
     let mut largest = list[0];
 
     for &item in list.iter() {
@@ -86,6 +87,18 @@ fn largest_char(list: &[char]) -> char {
     }
     largest
 }
+
+// fixed largest by adding PartialOrd and Copy to limit the types that can be passed in as items
+// fn largest_char(list: &[char]) -> char {
+//     let mut largest = list[0];
+
+//     for &item in list.iter() {
+//         if item > largest {
+//             largest = item;
+//         }
+//     }
+//     largest
+// }
 
 //---REFACTORING STEPS-----:
 //   1. Identify duplicate code.
@@ -187,11 +200,11 @@ fn main() {
     // }
 
     //find the largest number in the next vector
-    // let number_list = vec![102, 34, 6000, 89, 54, 2, 43, 8];
-    // let result = largest(&number_list);
-    // println!("The largest number in the next vector is {}", result);
+    let number_list = vec![102, 34, 6000, 89, 54, 2, 43, 8];
+    let result = largest(&number_list);
+    println!("The largest number in the next vector is {}", result);
 
     let char_list = vec!['a', 'b', 'c', 'd', 'e', 'f', 'g'];
-    let result = largest_char(&char_list);
+    let result = largest(&char_list);
     println!("The largest char is {}", result);
 }
