@@ -13,6 +13,12 @@
 //   This third rule makes methods much nicer to read and write because
 //   fewer symbols are necessary.
 
+// Additional timetime rules
+// let s: &'static str = "I have a static lifetime.";
+// One special lifetime to note is 'static, which denotes the
+// entire duration of the program. All string literals have the 
+// 'static lifetime, which is annotated above is var s.
+
 fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
     if x.len() > y.len() {
         x
@@ -45,7 +51,7 @@ fn main() {
         fn level(&self) -> i32 {
             3
         }
-
+        //Third lifetime elision rule
         fn announce_and_return_part(&self, announcement: &str) -> &str {
             println!("attention please: {}", announcement);
             self.part
