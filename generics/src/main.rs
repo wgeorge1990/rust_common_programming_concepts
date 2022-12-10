@@ -14,7 +14,7 @@ pub trait Summary {
     fn summarize(&self) -> String {
         String::from("(Read more...)")
     }
-} 
+}
 
 //clearer trait bounds with where clauses
 //fn some_fn<T: Display + Clone, U:Clone + Debug>(t: T, u: U)-> i32 {body}
@@ -33,7 +33,6 @@ pub trait Summary {
 //}
 //}
 
-
 pub struct NewsArticle {
     pub headline: String,
     pub location: String,
@@ -48,8 +47,8 @@ impl Summary for NewsArticle {
 }
 
 //     fn summarize(&self) -> String {
-//         format!("{}, by {} ({})", 
-//         self.headline, 
+//         format!("{}, by {} ({})",
+//         self.headline,
 //         self.author, self.location)
 //     }
 // }
@@ -63,19 +62,23 @@ pub struct Tweet {
 
 impl Summary for Tweet {
     fn summarize(&self) -> String {
-        format!("{} posted: {}: {}",self.summarize_author(), self.username, self.content)
+        format!(
+            "{} posted: {}: {}",
+            self.summarize_author(),
+            self.username,
+            self.content
+        )
     }
     fn summarize_author(&self) -> String {
-            format!("@{}", self.username)
+        format!("@{}", self.username)
     }
 }
-//  a trait bound look like this -> 
+//  a trait bound look like this ->
 // pub fn notify<T: Summary>(item: T) {
 // pub fn notify(item: impl Summary) {
 pub fn notify<T: Summary>(item: T) {
     println!("Breaking new! {}", item.summarize());
 }
-
 
 fn largest<T: PartialOrd + Copy>(list: &[T]) -> T {
     let mut largest = list[0];
@@ -128,7 +131,10 @@ fn main() {
 
     //default trait summary should be printed from below function because
     //the trait implemtation for summarize is an empty block.
-    println!("1 new newsarticle: default behavior expected: {}", news_article.summarize());
+    println!(
+        "1 new newsarticle: default behavior expected: {}",
+        news_article.summarize()
+    );
     // can call notify on items that implement the summary trait on them like newsarticle and tweet.
     notify(news_article);
     notify(tweet);
@@ -209,7 +215,7 @@ fn main() {
     println!("The largest char is {}", result);
 
     use std::fmt::Display;
-        #[derive(Debug)]
+    #[derive(Debug)]
     struct Pair<T> {
         x: T,
         y: T,
@@ -217,10 +223,7 @@ fn main() {
 
     impl<T> Pair<T> {
         fn new(x: T, y: T) -> Self {
-            Self {
-                x,
-                y,
-            }
+            Self { x, y }
         }
     }
 
@@ -234,14 +237,15 @@ fn main() {
         }
     }
 
-    let pair = Pair {
-        x: 15,
-        y: 35,
-    };
+    let pair = Pair { x: 15, y: 35 };
 
     pair.cmp_display();
     let pair2 = Pair::new(45, 65);
     println!("Pair::new {:?}", pair2);
     pair2.cmp_display();
 
+    // impl<T: Display> ToString for T {}
+
+    let s = 3.to_string();
+    println!("{}", s);
 }
