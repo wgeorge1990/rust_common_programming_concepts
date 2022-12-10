@@ -3,6 +3,16 @@
 // &'a i32 a reference with an explicit lifetime
 // &'a mut i32 a mutable reference with an explicit lifetime
 
+// THREE LIFETIME PARAMETER RULES
+// 1.Each parameter that is a reference get its own lifetime parameter
+// 2.If there is exactly one input lifetime parameter, then
+//   that lifetime parameter is assigned to all output lifetime parameters.
+// 3.If there are multiple input lifetime parameters, but one
+//   of them is &self or &mut self becasue this is a method,
+//   the lifetime of self is assigned to all output lifetime parameters.
+//   This third rule makes methods much nicer to read and write because
+//   fewer symbols are necessary.
+
 fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
     if x.len() > y.len() {
         x
