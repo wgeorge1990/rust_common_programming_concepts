@@ -207,4 +207,41 @@ fn main() {
     let char_list = vec!['a', 'b', 'c', 'd', 'e', 'f', 'g'];
     let result = largest(&char_list);
     println!("The largest char is {}", result);
+
+    use std::fmt::Display;
+        #[derive(Debug)]
+    struct Pair<T> {
+        x: T,
+        y: T,
+    }
+
+    impl<T> Pair<T> {
+        fn new(x: T, y: T) -> Self {
+            Self {
+                x,
+                y,
+            }
+        }
+    }
+
+    impl<T: Display + PartialOrd> Pair<T> {
+        fn cmp_display(&self) {
+            if self.x >= self.y {
+                println!("The largest member is x = {}", self.x);
+            } else {
+                println!("The largest member is y = {}", self.y);
+            }
+        }
+    }
+
+    let pair = Pair {
+        x: 15,
+        y: 35,
+    };
+
+    pair.cmp_display();
+    let pair2 = Pair::new(45, 65);
+    println!("Pair::new {:?}", pair2);
+    pair2.cmp_display();
+
 }
