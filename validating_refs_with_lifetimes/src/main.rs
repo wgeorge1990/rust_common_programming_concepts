@@ -30,23 +30,35 @@ fn main() {
     let string2 = "abcd";
     let result = longest(string1.as_str(), string2);
     println!("The longest string is {}", result);
-   
+
+
     #[derive(Debug)]
     struct ImportantExcerp<'a> {
         part: &'a str,
     }
 
-    let novel = String::from("Call me. Call me again years ago...");
-        let first_sentence = novel
-            .split('.')
-            .next()
-            .expect("No period or next segment");
+    //The lifetime parameter declaration after impl 
+    //and use after the type name is required, 
+    //but we’re not required to annotate the lifetime 
+    //of the reference to self because of the first elision rule.
+    impl<'a> ImportantExcerp<'a> {
+        fn level(&self) -> i32 {
+            3
+        }
 
-        println!("{:?}", first_sentence);
+        fn announce_and_return_part(&self, announcement: &str) -> &str {
+            println!("attention please: {}", announcement);
+            self.part
+        }
+    }
+
+    let novel = String::from("Call me. Call me again years ago...");
+    let first_sentence = novel.split('.').next().expect("No period or next segment");
+
+    println!("{:?}", first_sentence);
     let imp_exerp = ImportantExcerp {
-        part: first_sentence
+        part: first_sentence,
     };
     println!("{:?}", imp_exerp);
-    
-
+    println!("{}",imp_exerp.announce_and_return_part("Announcement"));
 }
