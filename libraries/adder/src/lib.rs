@@ -9,6 +9,15 @@
 //To display output for passing tests run $cargo test -- --show-output
 //Ignore tests by adding #[ignore] annotation
 //run tests that include text by cargo test text
+//run ignored only with cargo test -- --ignored
+
+//Two main categories: UNIT TEST && INTEGRATION TESTS
+// Unit Tests: are small and more focused, testing one module in isolation at a time,
+//             and can test private interfaces.
+// Integration Tests: are entirely external to your library and use your code in the 
+//                    same way any other external code would, using only public interface
+//                    and potientially excercising multiple modules per test.
+
 pub fn add(left: usize, right: usize) -> usize {
     left + right
 }
