@@ -3,6 +3,9 @@
 //https://doc.rust-lang.org/nightly/unstable-book/library-features/test.html
 //Other programming languages: actual and expected
 //rust: left and right
+//Threads: by default rust takes advantage of threads when running tests.
+//If you want to use shared state or enviornment variables then ensure you run
+//the tests on a single thread via $cargo test -- --test-threads=1
 
 pub fn add(left: usize, right: usize) -> usize {
     left + right
