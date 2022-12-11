@@ -13,6 +13,7 @@ fn main() {
     // a. add #[test] attribute above the fn test() {};
     // b. $ cargo test => builds a test runner binary that runs the annotated #[test] functions.
     // c. reports pass or fail for each defined test.
-
+    // next: creating new library called adder =>
+    // $cargo new adder --lib && cd adder
     
 }
