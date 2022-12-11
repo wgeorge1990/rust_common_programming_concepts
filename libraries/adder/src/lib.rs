@@ -1,3 +1,9 @@
+//assert! macro evaluates to a boolean, if true, assert! does nothing and test passes.
+//Benchmark test documentation
+//https://doc.rust-lang.org/nightly/unstable-book/library-features/test.html
+//Other programming languages: actual and expected
+//rust: left and right
+
 pub fn add(left: usize, right: usize) -> usize {
     left + right
 }
@@ -28,13 +34,11 @@ pub struct Guess {
 
 impl Guess {
     pub fn new(value: i32) -> Guess {
-        if value < 1|| value > 100 {
+        if value < 1 || value > 100 {
             panic!("Guess value must be between 1 and 100, got {}", value);
         }
 
-        Guess {
-            value
-        }
+        Guess { value }
     }
 }
 #[cfg(test)]
@@ -92,12 +96,21 @@ mod tests {
         let result = greeting("William");
         assert!(
             result.contains("William"),
-            "Greeting did not contain name, value was `{}`", result
+            "Greeting did not contain name, value was `{}`",
+            result
         );
     }
+
+    //returning specific error using Result type
+    //This enables you to use the question mark operator in the
+    //body of tests, which can be a convient way to write tests that
+    //should fail if any operation within them returns a Err variant.
+    #[test]
+    fn it_works() -> Result<(), String> {
+        if 2 + 2 == 4 {
+            Ok(())
+        } else {
+            Err(String::from("two plus two does not equal four"))
+        }
+    }
 }
-//assert! macro evaluates to a boolean, if true, assert! does nothing and test passes.
-//Benchmark test documentation
-//https://doc.rust-lang.org/nightly/unstable-book/library-features/test.html
-//Other programming languages: actual and expected
-//rust: left and right
