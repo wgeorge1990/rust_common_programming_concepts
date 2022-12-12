@@ -17,6 +17,19 @@
 // Integration Tests: are entirely external to your library and use your code in the 
 //                    same way any other external code would, using only public interface
 //                    and potientially excercising multiple modules per test.
+// For unit test which are going in the same file as the library code, use below annotations to
+// mark the start of the test module.
+// In rust all private functions are testable and should be tested.
+
+// #[cfg(test)]
+//  mod tests {
+//      use super::*;
+//
+//  #[test]
+//  fn it_workds() {
+//     assert_eq!(2 + 2, 4);
+//   }
+// }
 
 pub fn add(left: usize, right: usize) -> usize {
     left + right
@@ -24,6 +37,10 @@ pub fn add(left: usize, right: usize) -> usize {
 
 pub fn add_two(a: i32) -> i32 {
     a + 2
+}
+
+fn internal_adder(a: i32, b: i32) -> i32 {
+    a + b
 }
 
 #[derive(Debug)]
