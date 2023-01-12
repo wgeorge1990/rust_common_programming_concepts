@@ -38,4 +38,17 @@ fn main() {
     let x = 5;
     let y = &x;
     println!("{}", *y);
+
+    let z = 6;
+    let i = MyBox::new(z);
+    println!("{}", *i);
+
+}
+
+struct MyBox<T>(T);
+
+impl<T> MyBox<T> {
+    fn new(x: T) -> MyBox<T> {
+        MyBox(x)
+    }
 }
