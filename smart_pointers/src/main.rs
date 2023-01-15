@@ -42,7 +42,6 @@ fn main() {
     let z = 100;
     let i = MyBox::new(z);
     println!("{}", *i);
-
 }
 
 use std::ops::Deref;
