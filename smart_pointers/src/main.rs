@@ -60,3 +60,8 @@ impl<T> MyBox<T> {
         MyBox(x)
     }
 }
+
+//Deref coercion mutability operators
+// - from &T to &U when T: Deref<Target=U>
+// - from &mut T to U when T: DerefMut<Target=U>
+// - from 7mut T to &U when T: Deref<Target=U>
