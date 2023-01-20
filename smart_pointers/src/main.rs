@@ -13,6 +13,10 @@
 //!
 use crate::List::{Cons, Nil};
 
+use std::rc::Rc;
+
+use crate::SharedList::{Cons as OtherCons, Nil as OtherNil};
+
 #[derive(Debug)]
 enum List {
     Cons(i32, Box<List>),
@@ -54,6 +58,13 @@ impl Drop for CustomSmartPointer {
     }
 }
 
+//Using Rc<T> to Share Data
+//see enums List for example below...
+enum SharedList {
+    Cons(i32, Rc<SharedList>),
+    Nil,
+}
+
 fn main() {
     println!("Use a box to store an i32 value on the heap");
     let b = Box::new(5);
@@ -76,6 +87,12 @@ fn main() {
     let c = CustomSmartPointer { data: String::from("cleanup for var c")};
     let d = CustomSmartPointer { data: String::from("Cleanup for var d")};
     println!("CustomSmartPointer created.");
+
+    //using Rc<T> to share a and b's ownership of a third list, a
+    //using Box<T> will result in a use of moved value: 'a' error
+    let aa = Rc::new(OtherCons(5, Rc::new(OtherCons(10, Rc::new(OtherNil)))));
+    let bb = Rc::new(OtherCons(3, Rc::clone(&aa)));
+    let cb = Rc::new(OtherCons(4, Rc::clone(&aa)));
 }
 
 
