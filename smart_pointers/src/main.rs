@@ -48,6 +48,8 @@ struct CustomSmartPointer {
 
 impl Drop for CustomSmartPointer {
     fn drop(&mut self) {
+        //rust calls this automatically when the individual instances
+        //go out of scope.
         println!("Dropping CustomSmartPointer with data {}", self.data);
     }
 }
