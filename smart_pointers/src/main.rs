@@ -82,10 +82,14 @@ fn main() {
     let i = MyBox::new(z);
     println!("{}", *i);
 
-    // customSmartPointer that implements the drop trait and demonstrating where we 
+    // customSmartPointer that implements the drop trait and demonstrating where we
     //   would place our cleanup code in realation to the instances of the smartpointers.
-    let c = CustomSmartPointer { data: String::from("cleanup for var c")};
-    let d = CustomSmartPointer { data: String::from("Cleanup for var d")};
+    let c = CustomSmartPointer {
+        data: String::from("cleanup for var c"),
+    };
+    let d = CustomSmartPointer {
+        data: String::from("Cleanup for var d"),
+    };
     println!("CustomSmartPointer created.");
 
     //using Rc<T> to share a and b's ownership of a third list, a
@@ -98,9 +102,11 @@ fn main() {
         let cb = Rc::new(OtherCons(4, Rc::clone(&aa)));
         println!("Count after creating cb = {}", Rc::strong_count(&aa));
     }
-    println!("count after cb goes out of scope = {}", Rc::strong_count(&aa));
+    println!(
+        "count after cb goes out of scope = {}",
+        Rc::strong_count(&aa)
+    );
 }
-
 
 // How Deref coercion interacts with mutability
 // - from &T to &U when T: Deref<Target=U>
