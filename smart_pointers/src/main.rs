@@ -26,6 +26,32 @@ enum Message {
     ChangeColor(i32, i32, i32),
 }
 
+use std::ops::Deref;
+struct MyBox<T>(T);
+
+impl<T> Deref for MyBox<T> {
+    type Target = T;
+
+    fn deref(&self) -> &T {
+        &self.0
+    }
+}
+impl<T> MyBox<T> {
+    fn new(x: T) -> MyBox<T> {
+        MyBox(x)
+    }
+}
+
+struct CustomSmartPointer {
+    data: String,
+}
+
+impl Drop for CustomSmartPointer {
+    fn drop(&mut self) {
+        println!("Dropping CustomSmartPointer with data {}", self.data);
+    }
+}
+
 fn main() {
     println!("Use a box to store an i32 value on the heap");
     let b = Box::new(5);
@@ -42,23 +68,14 @@ fn main() {
     let z = 100;
     let i = MyBox::new(z);
     println!("{}", *i);
+
+    // customSmartPointer that implements the drop trait and demonstrating where we 
+    //   would place our cleanup code in realation to the instances of the smartpointers.
+    let c = CustomSmartPointer { data: String::from("cleanup for var c")};
+    let d = CustomSmartPointer { data: String::from("Cleanup for var d")};
+    println!("CustomSmartPointer created.");
 }
 
-use std::ops::Deref;
-struct MyBox<T>(T);
-
-impl<T> Deref for MyBox<T> {
-    type Target = T;
-
-    fn deref(&self) -> &T {
-        &self.0
-    }
-}
-impl<T> MyBox<T> {
-    fn new(x: T) -> MyBox<T> {
-        MyBox(x)
-    }
-}
 
 // How Deref coercion interacts with mutability
 // - from &T to &U when T: Deref<Target=U>
