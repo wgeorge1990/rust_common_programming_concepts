@@ -60,7 +60,7 @@ impl<T> MyBox<T> {
     }
 }
 
-//Deref coercion mutability operators
+// How Deref coercion interacts with mutability
 // - from &T to &U when T: Deref<Target=U>
 // - from &mut T to U when T: DerefMut<Target=U>
 // - from 7mut T to &U when T: Deref<Target=U>
