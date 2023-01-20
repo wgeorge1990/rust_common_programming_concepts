@@ -91,8 +91,12 @@ fn main() {
     //using Rc<T> to share a and b's ownership of a third list, a
     //using Box<T> will result in a use of moved value: 'a' error
     let aa = Rc::new(OtherCons(5, Rc::new(OtherCons(10, Rc::new(OtherNil)))));
+    println!("Count after creating aa = {}", Rc::strong_count(&aa));
     let bb = Rc::new(OtherCons(3, Rc::clone(&aa)));
+    println!("Count after creating bb = {}", Rc::strong_count(&aa));
     let cb = Rc::new(OtherCons(4, Rc::clone(&aa)));
+    println!("Count after creating cb = {}", Rc::strong_count(&aa));
+
 }
 
 
