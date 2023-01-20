@@ -94,9 +94,11 @@ fn main() {
     println!("Count after creating aa = {}", Rc::strong_count(&aa));
     let bb = Rc::new(OtherCons(3, Rc::clone(&aa)));
     println!("Count after creating bb = {}", Rc::strong_count(&aa));
-    let cb = Rc::new(OtherCons(4, Rc::clone(&aa)));
-    println!("Count after creating cb = {}", Rc::strong_count(&aa));
-
+    {
+        let cb = Rc::new(OtherCons(4, Rc::clone(&aa)));
+        println!("Count after creating cb = {}", Rc::strong_count(&aa));
+    }
+    println!("count after cb goes out of scope = {}", Rc::strong_count(&aa));
 }
 
 
