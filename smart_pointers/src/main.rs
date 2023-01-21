@@ -77,28 +77,31 @@ pub struct LimitTracker<'a, T: 'a + Messenger> {
 }
 
 impl<'a, T> LimitTracker<'a, T>
-    where T: Messenger {
-        pub fn new(messenger: &T, max: usize) -> LimitTracker<T> {
-            LimitTracker { 
-                messenger, 
-                value: 0, 
-                max, 
-            }
+where
+    T: Messenger,
+{
+    pub fn new(messenger: &T, max: usize) -> LimitTracker<T> {
+        LimitTracker {
+            messenger,
+            value: 0,
+            max,
         }
+    }
 
-
-pub fn set_value(&mut self, value: usize) {
-    self.value = value;
-    let percentage_of_max = self.value as f64 / self.max as f64;
-    if percentage_of_max >= 1.0 {
-        self.messenger.send("Error: You are over your quota!");
-    } else if percentage_of_max >= 0.9 {
-        self.messenger.send("Urgent warning: You've used up over 90% of your quota!");
-    } else if percentage_of_max >= 0.75 {
-        self.messenger.send("Warning: You've used up over 75% of your quota!");
+    pub fn set_value(&mut self, value: usize) {
+        self.value = value;
+        let percentage_of_max = self.value as f64 / self.max as f64;
+        if percentage_of_max >= 1.0 {
+            self.messenger.send("Error: You are over your quota!");
+        } else if percentage_of_max >= 0.9 {
+            self.messenger
+                .send("Urgent warning: You've used up over 90% of your quota!");
+        } else if percentage_of_max >= 0.75 {
+            self.messenger
+                .send("Warning: You've used up over 75% of your quota!");
+        }
     }
 }
-    }
 
 fn main() {
     println!("Use a box to store an i32 value on the heap");
@@ -147,3 +150,34 @@ fn main() {
 // - from &T to &U when T: Deref<Target=U>
 // - from &mut T to U when T: DerefMut<Target=U>
 // - from 7mut T to &U when T: Deref<Target=U>
+use std::cell::RefCell;
+struct MockMessenger {
+    sent_messages: RefCell<Vec<String>>,
+}
+
+impl MockMessenger {
+    fn new() -> MockMessenger {
+        MockMessenger {
+            sent_messages: RefCell::new(vec![]),
+        }
+    }
+}
+
+impl Messenger for MockMessenger {
+    fn send(&self, message: &str) {
+        self.sent_messages.borrow_mut().push(String::from(message))
+    }
+}
+
+#[test]
+fn it_sends_an_over_75_percent_warning_message() {
+    //create mock messenger instance for test
+    let mock_messenger = MockMessenger::new();
+    //create limit tracker from crate::LimitTracker above
+    let mut limit_tracker = LimitTracker::new(&mock_messenger, 100);
+    //use setValue method to aggree with the evaluation in the test name
+    limit_tracker.set_value(80);
+
+    //assert equal that the message is present and the length is eqaul to one
+    assert_eq!(mock_messenger.sent_messages.borrow().len(), 1);
+}
