@@ -165,8 +165,8 @@ impl MockMessenger {
 
 impl Messenger for MockMessenger {
     fn send(&self, message: &str) {
-       self.sent_messages.borrow_mut().push(String::from(message));
-    //    let mut two_borrow = self.sent_messages.borrow_mut();
+        self.sent_messages.borrow_mut().push(String::from(message));
+        //    let mut two_borrow = self.sent_messages.borrow_mut();
         // two_borrow.push(String::from(message));
     }
 }
