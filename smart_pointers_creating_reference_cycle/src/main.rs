@@ -1,6 +1,6 @@
-use std::rc::Rc;
-use std::cell::RefCell;
 use crate::List::{Cons, Nil};
+use std::cell::RefCell;
+use std::rc::Rc;
 
 #[derive(Debug)]
 enum List {
@@ -17,13 +17,11 @@ impl List {
     }
 }
 
-
-
 fn main() {
     println!("Creating A Reference Cycle");
-    
+
     let a = Rc::new(Cons(5, RefCell::new(Rc::new(Nil))));
-    
+
     println!("a initial rc count = {}", Rc::strong_count(&a));
     println!("a next item = {:?}", a.tail());
 
@@ -42,9 +40,7 @@ fn main() {
     //uncomment the next line to see that we have a cycle:
     //it will overflow the stack...
     // println!("a next item = {:?}", a.tail());
-    //thread main has overflowed its stack 
+    //thread main has overflowed its stack
     //fatal runtime error: stack overflow
     //[1] 25101 abort cargo run
-
-
 }
