@@ -1,4 +1,5 @@
 # Rust Common Programming Concepts
+
 1. variables and mutability
     - variable shadowing
     - mutability
@@ -25,4 +26,3 @@
         1. borrowing
         2. slices
         3. how rust lays out data in memory
-
