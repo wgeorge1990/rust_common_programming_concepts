@@ -1,5 +1,6 @@
 use std::thread;
 use std::time::Duration;
+use std::sync::mpsc;
 
 fn main() {
     println!("creating thread and printing to a spawned thread");
@@ -14,8 +15,21 @@ fn main() {
     //     println!("hello number {} from the main thread!", i);
     //     thread::sleep(Duration::from_millis(1));
     // }
+
     // using_join();
-    using_move();
+
+    // using_move();
+
+    let (tx, rx) = mpsc::channel();
+    
+    thread::spawn(move || {
+        let val = String::from("hi");
+        tx.send(val).unwrap();
+    });
+
+    let recieved = rx.recv().unwrap();
+    println!("Got: {}", recieved);
+
 }
 
 fn using_move() {
