@@ -14,7 +14,20 @@ fn main() {
     //     println!("hello number {} from the main thread!", i);
     //     thread::sleep(Duration::from_millis(1));
     // }
-    using_join();
+    // using_join();
+    using_move();
+}
+
+fn using_move() {
+    let v: Vec<i32> = vec![1,2,3,4,5];
+
+    let handle = thread::spawn(move|| {
+        for n in v {
+            println!("{}", n);
+        }
+    });
+
+    handle.join().unwrap();
 }
 
 fn using_join() {
