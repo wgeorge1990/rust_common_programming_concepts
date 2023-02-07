@@ -23,12 +23,33 @@ fn main() {
     let (tx, rx) = mpsc::channel();
     
     thread::spawn(move || {
-        let val = String::from("hi");
-        tx.send(val).unwrap();
+        // let val = String::from("hi");
+        let vals = vec![
+            String::from("hi"),
+            String::from("from"),
+            String::from("the"),
+            String::from("thread"),
+        ];
+
+        for val in vals {
+            tx.send(val).unwrap();
+            thread::sleep(Duration::from_secs(1));
+        }
     });
 
-    let recieved = rx.recv().unwrap();
-    println!("Got: {}", recieved);
+        for received in rx {
+            println!("GOT: {}", received)
+        }
+
+        // tx.send(val).unwrap();
+        // below line will break and show borrow error at compile time 
+        // thanks to rusts ownership rules. This helps use write safe code
+        // println!("val is {}", val);
+    
+
+    // let recieved = rx.recv().unwrap();
+    // println!("Got: {}", recieved);
+
 
 }
 
