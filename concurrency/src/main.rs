@@ -23,7 +23,6 @@ fn main() {
     let (tx, rx) = mpsc::channel();
     //Cloning the sender, mpsc = multiple sender and single reciever channel
     let tx1 = mpsc::Sender::clone(&tx);
-    let tx2 = mpsc::Sender::clone(&tx);
 
     thread::spawn(move || {
         // let val = String::from("hi");
@@ -50,7 +49,7 @@ fn main() {
         ];
 
         for val in vals {
-            tx2.send(val).unwrap();
+            tx.send(val).unwrap();
             thread::sleep(Duration::from_secs(1));
         }
 
