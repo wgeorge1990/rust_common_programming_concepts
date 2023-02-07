@@ -1,6 +1,6 @@
+use std::sync::mpsc;
 use std::thread;
 use std::time::Duration;
-use std::sync::mpsc;
 
 fn main() {
     println!("creating thread and printing to a spawned thread");
@@ -10,7 +10,7 @@ fn main() {
     //         thread::sleep(Duration::from_millis(1));
     //     }
     // });
-    
+
     // for i in 1..5 {
     //     println!("hello number {} from the main thread!", i);
     //     thread::sleep(Duration::from_millis(1));
@@ -21,7 +21,7 @@ fn main() {
     // using_move();
 
     let (tx, rx) = mpsc::channel();
-    
+
     thread::spawn(move || {
         // let val = String::from("hi");
         let vals = vec![
@@ -37,26 +37,23 @@ fn main() {
         }
     });
 
-        for received in rx {
-            println!("GOT: {}", received)
-        }
+    for received in rx {
+        println!("GOT: {}", received)
+    }
 
-        // tx.send(val).unwrap();
-        // below line will break and show borrow error at compile time 
-        // thanks to rusts ownership rules. This helps use write safe code
-        // println!("val is {}", val);
-    
+    // tx.send(val).unwrap();
+    // below line will break and show borrow error at compile time
+    // thanks to rusts ownership rules. This helps use write safe code
+    // println!("val is {}", val);
 
     // let recieved = rx.recv().unwrap();
     // println!("Got: {}", recieved);
-
-
 }
 
 fn using_move() {
-    let v: Vec<i32> = vec![1,2,3,4,5];
+    let v: Vec<i32> = vec![1, 2, 3, 4, 5];
 
-    let handle = thread::spawn(move|| {
+    let handle = thread::spawn(move || {
         for n in v {
             println!("{}", n);
         }
