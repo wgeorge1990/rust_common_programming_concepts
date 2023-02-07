@@ -21,6 +21,9 @@ fn main() {
     // using_move();
 
     let (tx, rx) = mpsc::channel();
+    //Cloning the sender, mpsc = multiple sender and single reciever channel
+    let tx1 = mpsc::Sender::clone(&tx);
+    let tx2 = mpsc::Sender::clone(&tx);
 
     thread::spawn(move || {
         // let val = String::from("hi");
@@ -32,9 +35,26 @@ fn main() {
         ];
 
         for val in vals {
-            tx.send(val).unwrap();
+            tx1.send(val).unwrap();
             thread::sleep(Duration::from_secs(1));
         }
+    });
+
+    thread::spawn(move || {
+        // let val = String::from("hi");
+        let vals = vec![
+            String::from("hello"),
+            String::from("from"),
+            String::from("another"),
+            String::from("thread"),
+        ];
+
+        for val in vals {
+            tx2.send(val).unwrap();
+            thread::sleep(Duration::from_secs(1));
+        }
+
+
     });
 
     for received in rx {
