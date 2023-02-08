@@ -39,7 +39,9 @@ pub struct AveragedCollection {
 impl AveragedCollection {
     pub fn add(&mut self, value: i32) {
         self.list.push(value);
+        println!("{:?}", *self);
         self.update_average();
+        println!("{:?}", *self);
     }
 
     pub fn remove(&mut self) -> Option<i32> {
